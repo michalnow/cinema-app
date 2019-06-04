@@ -5,15 +5,22 @@ import { compose } from "redux";
 import { Link } from "react-router-dom";
 import AddComment from "../../Comments/AddComment";
 import CommentList from "../../Comments/CommentList";
+import ReactPlayer from "react-player";
+import { Rating } from "primereact/rating";
+
+import "primereact/resources/primereact.min.css";
+
+import "primeicons/primeicons.css";
 
 const MovieDetails = props => {
   const id = props.match.params.movieId;
   const { movie } = props;
   const { comments } = props;
   const { auth } = props;
+  window.scrollTo(0, 0);
   if (movie) {
     return (
-      <div className="container" style={{}}>
+      <div className="container">
         <div
           className="row justify-content-md-center"
           style={{ marginBottom: "5px" }}
@@ -24,18 +31,65 @@ const MovieDetails = props => {
           >
             <div className="card" style={{ marginBottom: "5px" }}>
               <div
-                className="card-header"
+                className="header"
                 style={{
-                  backgroundColor: "white",
-                  fontSize: "25px",
-                  fontFamily: "Comic Sans MS"
+                  backgroundColor: "#F8F9FA",
+                  fontSize: "30px",
+                  fontFamily: "Courier New"
                 }}
               >
                 {movie.title} ({movie.Year})
               </div>
               <div className="row ">
                 <div className="col-md-4">
+                  <h5>Rating based on our users: </h5>
+                  <Rating
+                    value={movie.rating}
+                    stars={7}
+                    style={{
+                      color: "gold",
+                      fontSize: "27px",
+                      fontWeight: "bold"
+                    }}
+                    cancel={false}
+                  />
+
                   <img className="" src={movie.image} alt="" />
+                  {auth.uid ? (
+                    <Link
+                      to={`/repertoire/${id}`}
+                      className="btn btn-lg btn-outline-light mr-2"
+                      style={{
+                        backgroundColor: "#0051a5",
+                        fontwe: "bold",
+                        marginLeft: "5px",
+                        marginBottom: "5px",
+                        marginTop: "5px",
+                        border: "none"
+                      }}
+                    >
+                      &nbsp;Avaiability&nbsp;
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="btn btn-lg btn-outline-light mr-2"
+                      style={{
+                        backgroundColor: "#0051a5",
+                        marginLeft: "5px",
+                        marginBottom: "5px",
+                        border: "none",
+                        marginTop: "5px",
+                        fontWeight: "bold"
+                      }}
+                    >
+                      Log in to get full experience{" "}
+                      <i
+                        className="pi pi-sign-in"
+                        style={{ fontSize: "1em" }}
+                      />
+                    </Link>
+                  )}
                 </div>
                 <div className="col-md-8 px-3">
                   <div
@@ -46,48 +100,29 @@ const MovieDetails = props => {
                     <p className="card-tex">{movie.plot}</p>
                     <p className="card-text">Actors: {movie.actors}</p>
                     <p className="card-text">Director: {movie.director}</p>
+                    <p className="card-text">Writer: {movie.writer}</p>
                     <p className="card-text">
                       Duration: {movie.duration} mins{" "}
                     </p>
-                    {auth.uid ? (
-                      <Link
-                        to={`/repertoire/${id}`}
-                        className="btn btn-lg btn-outline-light mr-2"
-                        style={{
-                          backgroundColor: "#7070EF",
-                          fontwe: "bold",
-                          marginLeft: "5px",
-                          marginBottom: "5px",
-                          border: "none"
-                        }}
-                      >
-                        &nbsp;Avaiability&nbsp;
-                      </Link>
-                    ) : (
-                      <Link
-                        to="/login"
-                        className="btn btn-lg btn-outline-light mr-2"
-                        style={{
-                          backgroundColor: "#7070EF",
-                          marginLeft: "5px",
-                          marginBottom: "5px",
-                          border: "none",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        Log in to get full experience
-                      </Link>
-                    )}
+                    <ReactPlayer
+                      url={movie.trailerURL}
+                      pip={true}
+                      width="auto"
+                      controls={true}
+                      style={{ marginBottom: "20px", marginRight: "30px" }}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-md-auto">
-            <CommentList comments={comments} />
-          </div>
         </div>
-        <div className="col md-auto">{auth.uid ? <AddComment /> : null}</div>
+        <div className="col-md-auto">
+          <CommentList comments={comments} filmId={id} />
+        </div>
+        <div className="col-md-auto">
+          {auth.uid ? <AddComment movieId={id} /> : null}
+        </div>
       </div>
     );
   } else {

@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createComment } from "../../store/actions/commentActions";
 
+import "primeicons/primeicons.css";
+
 class AddComment extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       body: "",
       date: "",
-      movieId: ""
+      movieId: this.props.movieId,
+      disabledBtn: true
     };
   }
 
@@ -31,34 +34,41 @@ class AddComment extends Component {
       currentDate.getMinutes();
     const newComment = {
       body: this.state.body,
-      date: datetime.toString()
+      date: datetime.toString(),
+      movieId: this.state.movieId
     };
-
+    this.setState({ body: "" });
     this.props.createComment(newComment);
     this.setState({ comment: "", date: "" });
   };
 
   render() {
     return (
-      <div className="md-12 text-center" style={{ marginBottom: "5px" }}>
+      <div className="col-xs-12 text-center" style={{ marginBottom: "5px" }}>
         <textarea
           className="form-control"
-          style={{ height: "100px" }}
+          value={this.state.body}
+          style={{ height: "100px", textAlign: "center", fontSize: "20px" }}
           name="body"
           rows="3"
           onChange={this.onChange}
+          placeholder="Type your comment here"
         />
+
         <button
           onClick={this.onSubmit}
           className="btn btn-block"
           style={{
-            backgroundColor: "#7070EF",
+            backgroundColor: "#0051a5",
             fontWeight: "bold",
             color: "white",
-            marginBottom: "5px"
+            fontSize: "20px",
+            marginBottom: "5px",
+            marginTop: "5px"
           }}
+          disabled={!this.state.body}
         >
-          Comment{" "}
+          Comment <i className="pi pi-comment" style={{ fontSize: "1em" }} />
         </button>
       </div>
     );

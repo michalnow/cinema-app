@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import UserIsAuthenticatedNav from "../UserManagement/UserIsAuthenticatedNav";
 import UserIsNotAuthenticatedNav from "../UserManagement/UserIsNotAuthenticatedNav";
 
+import "./style.css";
+
 const Header = props => {
   const { auth } = props;
-  console.log(auth);
   const links = auth.uid ? (
     <UserIsAuthenticatedNav />
   ) : (
@@ -14,20 +15,34 @@ const Header = props => {
   );
   return (
     <nav
-      className="navbar navbar-expand-sm navbar-light "
-      style={{ backgroundColor: "#4b4bf4" }}
+      className="navbar navbar-expand-lg navbar-light bg-light"
+      style={{
+        backgroundColor: "#4b4bf4"
+      }}
     >
-      <div className="container">
-        <Link to="" className="navbar-brand">
-          <img
-            src={require("../../images/cinema.svg.png")}
-            className="d-inline-block align-top"
-            style={{ height: "42px" }}
-            alt=""
-          />
-        </Link>
-        <ul className="navbar-nav nav-pills mr-auto">
-          <li className="nav-item nav-divider">
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+
+      <Link to="" className="navbar-brand">
+        <img
+          src={require("../../images/cinema.svg.png")}
+          className="d-inline-block align-top"
+          style={{ height: "42px" }}
+          alt=""
+        />
+      </Link>
+      <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li className="nav-item">
             <Link
               to="/repertoire"
               className="nav-link "
@@ -35,7 +50,7 @@ const Header = props => {
             >
               <button
                 type="button"
-                className="btn btn-lg btn-outline-light "
+                className="buttonHover btn btn-lg btn-outline"
                 style={{ border: "none", fontWeight: "bold" }}
               >
                 <i className="fa fa-film" />
@@ -43,11 +58,15 @@ const Header = props => {
               </button>
             </Link>
           </li>
-          <li className="nav-item nav-divider">
-            <Link to="" className="nav-link" style={{ fontSize: "20px" }}>
+          <li className="nav-item">
+            <Link
+              to="/priceList"
+              className="nav-link"
+              style={{ fontSize: "20px" }}
+            >
               <button
                 type="button"
-                className="btn btn-lg btn-outline-light "
+                className="buttonHover btn btn-lg btn-outline"
                 style={{ border: "none", fontWeight: "bold" }}
               >
                 <i className="fa fa-money" />
@@ -56,14 +75,18 @@ const Header = props => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="" className="nav-link" style={{ fontSize: "20px" }}>
+            <Link
+              to="/aboutUs"
+              className="nav-link"
+              style={{ fontSize: "20px" }}
+            >
               <button
                 type="button"
-                className="btn btn-lg btn-outline-light "
+                className="buttonHover btn btn-lg btn-outline"
                 style={{ border: "none", fontWeight: "bold" }}
               >
-                About us&nbsp;
                 <i className="fa fa-question-circle-o" />
+                &nbsp;About us
               </button>
             </Link>
           </li>

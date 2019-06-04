@@ -7,31 +7,32 @@ class Landing extends Component {
   constructor() {
     super();
     this.state = {
-      movie1: {},
-      movie2: {},
-      movie3: {}
+      movie1: null,
+      movie2: null,
+      movie3: null
     };
   }
 
   componentDidMount() {
-    const ref = firebase
+    window.scrollTo(0, 0);
+    firebase
       .firestore()
       .collection("films")
-      .doc("1EAErymd0w27sK7I908q")
+      .doc("AqLDohAOoD4zzr1VrhnE")
       .get()
       .then(doc => this.setState({ movie1: doc.data() }));
 
-    const ref2 = firebase
+    firebase
       .firestore()
       .collection("films")
-      .doc("cDVs1FMasgfDR7iSl3Rl")
+      .doc("IM3EqISzjJjIVYtrtKiu")
       .get()
       .then(doc => this.setState({ movie2: doc.data() }));
 
-    const ref3 = firebase
+    firebase
       .firestore()
       .collection("films")
-      .doc("eSDHTbudOcu26lYp9RTn")
+      .doc("XY7oD07I8SyVq1pBoMeL")
       .get()
       .then(doc => this.setState({ movie3: doc.data() }));
   }
@@ -42,90 +43,126 @@ class Landing extends Component {
     }
 
     return (
-      <div className="container" style={{ alignItems: "center" }}>
-        <div className="landing">
-          <div className="light-overlay landing-inner text-dark">
-            <div className="row">
-              <div className="col-md-12 text-center">
-                <h4 className="display-4 mb-4">Welcome to our page</h4>
-                <img
-                  className="img-fluid"
-                  src={require("../../images/cinema.svg.png")}
-                  alt=""
-                />
-                <p className="lead">
-                  Create your account to get full experience of our application
-                </p>
-                <hr />
-                <Link
-                  to="/register"
-                  className="btn btn-lg btn-outline-light mr-2"
-                  style={{
-                    backgroundColor: "#7070EF",
-                    border: "none",
-                    fontWeight: "bold"
-                  }}
-                >
-                  Sign Up
-                </Link>
-                <Link
-                  to="/login"
-                  className="btn btn-lg btn-outline-light mr-2"
-                  style={{
-                    backgroundColor: "#7070EF",
-                    border: "none",
-                    fontWeight: "bold"
-                  }}
-                >
-                  Login
-                </Link>
+      <div
+        className="col-md-12 text-center"
+        style={{
+          background: "white"
+        }}
+      >
+        <div
+          className="container"
+          style={{ marginTop: "50px", marginBottom: "20px" }}
+        >
+          <div className="landing">
+            <div className="light-overlay landing-inner text-dark">
+              <div className="row">
+                <div className="col-md-12 text-center ">
+                  <h4 className="display-4 mb-4">Welcome to our page</h4>
+                  <img
+                    className="img-fluid"
+                    src={require("../../images/cinema.svg.png")}
+                    alt=""
+                  />
+                  <p className="lead">
+                    Create your account to get full experience of our
+                    application
+                  </p>
+                  <hr />
+                  <Link
+                    to="/register"
+                    className="btn btn-lg btn-outline-light mr-2"
+                    style={{
+                      backgroundColor: "#0051a5",
+                      border: "none",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    Sign Up
+                  </Link>
+                  <Link
+                    to="/login"
+                    className="btn btn-lg btn-outline-light mr-2"
+                    style={{
+                      backgroundColor: "#0051a5",
+                      border: "none",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    Login
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="container">
-          <div
-            className="row justify-content-md-center text-center"
-            style={{ marginTop: "5px" }}
-          >
-            <div className="col col-lg-2">
-              <Link
-                to="/repertoire/1EAErymd0w27sK7I908q/details"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <h5 style={{ fontStyle: "italic", textAlign: "center" }}>
-                  {this.state.movie1.title}
-                </h5>
-
-                <img className="rounded" src={this.state.movie1.image} alt="" />
-              </Link>
-            </div>
+          <div className="container">
             <div
-              className="col col-lg-2"
-              style={{ marginRight: "40px", marginLeft: "40px" }}
+              className="row justify-content-md-center text-center"
+              style={{ marginTop: "5px" }}
             >
-              {" "}
-              <Link
-                to="/repertoire/cDVs1FMasgfDR7iSl3Rl/details"
-                style={{ textDecoration: "none", color: "black" }}
+              <div className="col col-lg-2">
+                {this.state.movie1 == null ? (
+                  <div className="spinner-grow text-info" role="status" />
+                ) : (
+                  <Link
+                    to="/repertoire/AqLDohAOoD4zzr1VrhnE/details"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <h5 style={{ fontStyle: "italic", textAlign: "center" }}>
+                      {this.state.movie1.title}
+                    </h5>
+
+                    <img
+                      className="rounded"
+                      src={this.state.movie1.image}
+                      alt=""
+                      style={{ marginBottom: "50px" }}
+                    />
+                  </Link>
+                )}
+              </div>
+              <div
+                className="col col-lg-2"
+                style={{ marginRight: "40px", marginLeft: "40px" }}
               >
-                <h5 style={{ fontStyle: "italic" }}>
-                  {this.state.movie2.title}
-                </h5>
-                <img className="rounded" src={this.state.movie2.image} alt="" />
-              </Link>
-            </div>
-            <div className="col col-lg-2">
-              {" "}
-              <Link
-                to="/repertoire/eSDHTbudOcu26lYp9RTn/details"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <h5 style={{ fontStyle: "italic" }}>
-                  {this.state.movie3.title}
-                </h5>
-                <img className="rounded" src={this.state.movie3.image} alt="" />
-              </Link>
+                {" "}
+                {this.state.movie2 == null ? (
+                  <div className="spinner-grow text-info" role="status" />
+                ) : (
+                  <Link
+                    to="/repertoire/IM3EqISzjJjIVYtrtKiu/details"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <h5 style={{ fontStyle: "italic" }}>
+                      {this.state.movie2.title}
+                    </h5>
+                    <img
+                      className="rounded"
+                      src={this.state.movie2.image}
+                      alt=""
+                    />
+                  </Link>
+                )}
+              </div>
+              <div className="col col-lg-2">
+                {" "}
+                {this.state.movie3 == null ? (
+                  <div className="spinner-grow text-info" role="status" />
+                ) : (
+                  <Link
+                    to="/repertoire/XY7oD07I8SyVq1pBoMeL/details"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <h5 style={{ fontStyle: "italic" }}>
+                      {this.state.movie3.title}
+                    </h5>
+                    <img
+                      className="rounded"
+                      src={this.state.movie3.image}
+                      alt=""
+                    />
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>

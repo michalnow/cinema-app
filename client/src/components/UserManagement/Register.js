@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 import { Redirect } from "react-router-dom";
+import { Message } from "primereact/message";
+import { Password } from "primereact/password";
+import { InputText } from "primereact/inputtext";
+
+//styles
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
 class Register extends Component {
   state = {
@@ -12,13 +19,21 @@ class Register extends Component {
     password: "",
     confirmPassword: "",
     inputBackgroundColor: "",
-    errors: {}
+    errors: {},
+    passwordColor: "",
+    emailColor: "",
+    confirmPaswordColor: "",
+    usernameColor: ""
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   handleSubmit = event => {
@@ -32,12 +47,36 @@ class Register extends Component {
     });
   };
 
-  handleFocus = () => {
-    this.setState({ inputBackgroundColor: "#d1d1fa" });
+  handleFocusPassword = () => {
+    this.setState({ passwordColor: "#d1d1fa" });
   };
 
-  handleBlur = () => {
-    this.setState({ backgroundColor: "#000000" });
+  handleFocusEmail = () => {
+    this.setState({ emailColor: "#d1d1fa" });
+  };
+
+  handleBlurPassword = () => {
+    this.setState({ passwordColor: "#FFFFFF" });
+  };
+
+  handleBlurEmail = () => {
+    this.setState({ emailColor: "#FFFFFF" });
+  };
+
+  handleFocusConfirmPassword = () => {
+    this.setState({ confirmPaswordColor: "#d1d1fa" });
+  };
+
+  handleBlurConfrimPassword = () => {
+    this.setState({ confirmPaswordColor: "#FFFFFF" });
+  };
+
+  handleFocusUsername = () => {
+    this.setState({ usernameColor: "#d1d1fa" });
+  };
+
+  handleBlurUsername = () => {
+    this.setState({ usernameColor: "#FFFFFF" });
   };
 
   render() {
@@ -64,64 +103,111 @@ class Register extends Component {
                 />
               </div>
               {authError ? (
-                <h5 style={{ color: "red", fontWeight: "bold" }}>
-                  {authError}
-                </h5>
+                <Message
+                  style={{ color: "red", border: "none", fontSize: "18px" }}
+                  severity="error"
+                  text={authError}
+                />
               ) : (
                 <h3 className="text-center mb-2">Sign-up</h3>
               )}
 
-              {/* <div class="alert alert-danger">
-                  <a class="close font-weight-light" data-dismiss="alert" href="#">×</a>Password is too short.
-                </div> */}
               <form className="form-group" onSubmit={this.handleSubmit}>
                 <div className="form-group has-success">
-                  <input
-                    className="form-control input-lg"
-                    style={{ backgroundColor: this.state.inputBackgroundColor }}
-                    placeholder="Username"
-                    name="username"
-                    value={username}
-                    type="username"
-                    onChange={this.handleChange}
-                    onFocus={this.handleFocus}
-                  />
+                  <span className="p-float-label" style={{ fontSize: "20px" }}>
+                    <InputText
+                      className="form-control input-lg"
+                      style={{ backgroundColor: this.state.usernameColor }}
+                      id="usname"
+                      name="username"
+                      value={username}
+                      type="username"
+                      onChange={this.handleChange}
+                      onFocus={this.handleFocusUsername}
+                      onBlur={this.handleBlurUsername}
+                    />
+
+                    <label
+                      htmlFor="usname"
+                      style={{ marginLeft: "10px", fontWeight: "bold" }}
+                    >
+                      Username
+                    </label>
+                  </span>
                 </div>
                 <div className="form-group has-error">
-                  <input
-                    className="form-control input-lg"
-                    style={{ backgroundColor: this.state.inputBackgroundColor }}
-                    placeholder="E-mail Address"
-                    value={email}
-                    name="email"
-                    type="email"
-                    onChange={this.handleChange}
-                    onFocus={this.handleFocus}
-                  />
+                  <span className="p-float-label" style={{ fontSize: "20px" }}>
+                    <InputText
+                      className="form-control input-lg"
+                      style={{ backgroundColor: this.state.emailColor }}
+                      id="mail"
+                      value={email}
+                      name="email"
+                      type="email"
+                      onChange={this.handleChange}
+                      onFocus={this.handleFocusEmail}
+                      onBlur={this.handleBlurEmail}
+                    />
+
+                    <label
+                      htmlFor="mail"
+                      style={{ marginLeft: "10px", fontWeight: "bold" }}
+                    >
+                      E-mail address
+                    </label>
+                  </span>
                 </div>
                 <div className="form-group has-success">
-                  <input
-                    className="form-control input-lg"
-                    style={{ backgroundColor: this.state.inputBackgroundColor }}
-                    placeholder="Password"
-                    name="password"
-                    value={password}
-                    type="password"
-                    onChange={this.handleChange}
-                    onFocus={this.handleFocus}
-                  />
+                  <span className="p-float-label" style={{ fontSize: "20px" }}>
+                    <Password
+                      className="form-control input-lg"
+                      style={{
+                        backgroundColor: this.state.passwordColor,
+                        zIndex: 100
+                      }}
+                      id="pass"
+                      name="password"
+                      value={password}
+                      type="password"
+                      onChange={this.handleChange}
+                      onFocus={this.handleFocusPassword}
+                      onBlur={this.handleBlurPassword}
+                      promptLabel=""
+                      weakLabel=""
+                      strongLabel=""
+                      mediumLabel=""
+                    />
+                    <label
+                      htmlFor="pass"
+                      style={{ marginLeft: "10px", fontWeight: "bold" }}
+                    >
+                      Password
+                    </label>
+                  </span>
                 </div>
                 <div className="form-group has-success">
-                  <input
-                    className="form-control input-lg"
-                    style={{ backgroundColor: this.state.inputBackgroundColor }}
-                    placeholder="Confirm Password"
-                    name="confirmPassword"
-                    value={confirmPassword}
-                    type="password"
-                    onChange={this.handleChange}
-                    onFocus={this.handleFocus}
-                  />
+                  <span className="p-float-label" style={{ fontSize: "20px" }}>
+                    <InputText
+                      className="form-control input-lg"
+                      style={{
+                        backgroundColor: this.state.confirmPaswordColor
+                      }}
+                      name="confirmPassword"
+                      id="confirm"
+                      value={confirmPassword}
+                      type="password"
+                      onChange={this.handleChange}
+                      onFocus={this.handleFocusConfirmPassword}
+                      onBlur={this.handleBlurConfrimPassword}
+                    />
+
+                    <label
+                      htmlFor="confirm"
+                      style={{ marginLeft: "10px", fontWeight: "bold" }}
+                    >
+                      Confirm password
+                    </label>
+                  </span>
                 </div>
                 <div className="checkbox">
                   <label>
@@ -130,12 +216,15 @@ class Register extends Component {
                     <Link to="">terms of service</Link>
                   </label>
                 </div>
-                <input
+                <button
                   className="btn btn-lg btn-primary btn-block"
                   value="Sign Me Up"
                   type="submit"
-                  style={{ backgroundColor: "#7070EF" }}
-                />
+                  style={{ backgroundColor: "#0051a5" }}
+                >
+                  Sign me up{" "}
+                  <i className="pi pi-user-plus" style={{ fontSize: "1em" }} />
+                </button>
               </form>
             </div>
           </div>

@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\node_modules\\.bin",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\MovieDashobard",
+    "\\src\\components\\PriceList",
+    "\\src\\store",
+    "\\src\\store\\actions",
+    "\\src\\store\\reducers"
+  ],
+  "SelectedNode": "\\src\\components\\MovieDashobard\\Dashboard.js",
+  "PreviewInSolutionExplorer": false
+}

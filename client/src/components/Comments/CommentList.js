@@ -1,17 +1,19 @@
 import React from "react";
 import CommentItem from "./CommentItem";
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ comments, filmId }) => {
   return (
     <div>
       <div className="container">
         <div
-          className="col-md-auto "
+          className="row justify-content-sm-center"
           style={{ overflowY: "auto", overflowX: "hidden" }}
         >
           {comments &&
             comments.map(comment => {
-              return <CommentItem comment={comment} key={comment.id} />;
+              return comment.movieId === filmId ? (
+                <CommentItem comment={comment} key={comment.id} />
+              ) : null;
             })}
         </div>
       </div>

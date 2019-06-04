@@ -11,7 +11,8 @@ export const signUp = newUser => {
           .collection("users")
           .doc(resp.user.uid)
           .set({
-            username: newUser.username
+            username: newUser.username,
+            isAdmin: false
           });
       })
       .then(() => {
