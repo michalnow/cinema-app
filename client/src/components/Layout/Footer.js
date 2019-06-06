@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 class Footer extends Component {
   render() {
@@ -21,7 +20,12 @@ class Footer extends Component {
               </div>
 
               <div className="col-md-6 col-lg-6 text-center text-md-right">
-                <a className="fb-ic" href="https://www.facebook.com/" target="_blank">
+                <a
+                  className="fb-ic"
+                  href="https://www.facebook.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <i
                     className="fa fa-facebook-f white-text mr-5"
                     style={{ fontSize: "30px", color: "white" }}
@@ -30,7 +34,12 @@ class Footer extends Component {
                   </i>
                 </a>
 
-                <a className="tw-ic" href="https://twitter.com" target="_blank">
+                <a
+                  className="tw-ic"
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <i
                     className="fa fa-twitter white-text mr-5"
                     style={{ fontSize: "30px", color: "white" }}
@@ -39,7 +48,12 @@ class Footer extends Component {
                   </i>
                 </a>
 
-                <a className="ins-ic" href="https://www.instagram.com/" target="_blank">
+                <a
+                  className="ins-ic"
+                  href="https://www.instagram.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <i
                     className="fa fa-instagram mr-5"
                     style={{ fontSize: "30px", color: "white" }}
@@ -48,12 +62,17 @@ class Footer extends Component {
                   </i>
                 </a>
 
-                <a className="ins-ic" href="https://www.youtube.com" target="_blank">
-                <i
-                  className="fa fa-youtube mr-5"
-                  style={{ fontSize: "30px", color: "white" }}
-                />
-                 </a>
+                <a
+                  className="ins-ic"
+                  href="https://www.youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i
+                    className="fa fa-youtube mr-5"
+                    style={{ fontSize: "30px", color: "white" }}
+                  />
+                </a>
               </div>
             </div>
           </div>
@@ -83,18 +102,40 @@ class Footer extends Component {
                 style={{ width: "60px" }}
               />
               <p>
-                <a href="https://github.com/robLesniak/cinema-app" target="_blank">
+                <a
+                  href="https://github.com/robLesniak/cinema-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Git Hub
                 </a>
               </p>
               <p>
-                <a href="https://cinemapp-service.firebaseapp.com/repertoire" target="_blank">Registration</a>
+                <a
+                  href="https://cinemapp-service.firebaseapp.com/repertoire"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Registration
+                </a>
               </p>
               <p>
-                <a href="https://cinemapp-service.firebaseapp.com/priceList" target="_blank">Price list</a>
+                <a
+                  href="https://cinemapp-service.firebaseapp.com/priceList"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Price list
+                </a>
               </p>
               <p>
-                <a href="https://cinemapp-service.firebaseapp.com/aboutUs" target="_blank">About us</a>
+                <a
+                  href="https://cinemapp-service.firebaseapp.com/aboutUs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  About us
+                </a>
               </p>
             </div>
 
