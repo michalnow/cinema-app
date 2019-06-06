@@ -41,7 +41,7 @@ const MovieDetails = props => {
                 {movie.title} ({movie.Year})
               </div>
               <div className="row ">
-                <div className="col-md-4">
+                <div className="col-sm-4">
                   <h5>Rating based on our users: </h5>
                   <Rating
                     value={movie.rating}
@@ -54,53 +54,61 @@ const MovieDetails = props => {
                     cancel={false}
                   />
 
-                  <img className="" src={movie.image} alt="" />
+                  <img className="rounded img-fluid" src={movie.image} alt="" />
                   {auth.uid ? (
-                    <Link
-                      to={`/repertoire/${id}`}
-                      className="btn btn-lg btn-outline-light mr-2"
-                      style={{
-                        backgroundColor: "#0051a5",
-                        fontwe: "bold",
-                        marginLeft: "5px",
-                        marginBottom: "5px",
-                        marginTop: "5px",
-                        border: "none"
-                      }}
-                    >
-                      &nbsp;Avaiability&nbsp;
-                    </Link>
+                    <div className="row ">
+                      <div className="col justify-content-md-center">
+                        <Link
+                          to={`/repertoire/${id}`}
+                          className="btn btn-lg btn-outline-light"
+                          style={{
+                            backgroundColor: "#0051a5",
+                            fontweight: "bold",
+                            marginBottom: "5px",
+                            marginTop: "5px",
+                            border: "none",
+                            fontWeight: "bold"
+                          }}
+                        >
+                          &nbsp;Avaiability&nbsp;
+                        </Link>
+                      </div>
+                    </div>
                   ) : (
-                    <Link
-                      to="/login"
-                      className="btn btn-lg btn-outline-light mr-2"
-                      style={{
-                        backgroundColor: "#0051a5",
-                        marginLeft: "5px",
-                        marginBottom: "5px",
-                        border: "none",
-                        marginTop: "5px",
-                        fontWeight: "bold"
-                      }}
-                    >
-                      Log in to get full experience{" "}
-                      <i
-                        className="pi pi-sign-in"
-                        style={{ fontSize: "1em" }}
-                      />
-                    </Link>
+                    <div className="row ">
+                      <div className="col justify-content-md-center">
+                        <Link
+                          to="/login"
+                          className="btn btn-lg btn-outline-light"
+                          style={{
+                            backgroundColor: "#0051a5",
+                            border: "none",
+                            marginTop: "5px",
+                            fontWeight: "bold"
+                          }}
+                        >
+                          Log in to get full experience{" "}
+                          <i
+                            className="pi pi-sign-in"
+                            style={{ fontSize: "1em" }}
+                          />
+                        </Link>
+                      </div>
+                    </div>
                   )}
                 </div>
-                <div className="col-md-8 px-3">
-                  <div
-                    className="card-block px-6"
-                    style={{ marginRight: "30px" }}
-                  >
+                <div className="col-md-7">
+                  <div className="card-block">
                     <h4 className="card-title">{movie.type}</h4>
                     <p className="card-tex">{movie.plot}</p>
                     <p className="card-text">Actors: {movie.actors}</p>
-                    <p className="card-text">Director: {movie.director}</p>
-                    <p className="card-text">Writer: {movie.writer}</p>
+                    {movie.director.length === 0 ? null : (
+                      <p className="card-text">Director: {movie.director}</p>
+                    )}
+                    {movie.writer.length === 0 ? null : (
+                      <p className="card-text">Writer: {movie.writer}</p>
+                    )}
+
                     <p className="card-text">
                       Duration: {movie.duration} mins{" "}
                     </p>
@@ -109,7 +117,7 @@ const MovieDetails = props => {
                       pip={true}
                       width="auto"
                       controls={true}
-                      style={{ marginBottom: "20px", marginRight: "30px" }}
+                      style={{ marginBottom: "20px" }}
                     />
                   </div>
                 </div>

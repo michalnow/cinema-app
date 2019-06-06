@@ -18,16 +18,7 @@ class Dashboard extends Component {
 
     return (
       <div className="container">
-        <div className="row justify-content-md-center">
-          <div className="col col-lg-2" />
-          <div
-            className="col-md-auto"
-            style={{ marginTop: "5px", marginBottom: "5px" }}
-          >
-            <MovieList movies={movies} auth={auth} />
-          </div>
-          <div className="col col-lg-2" />
-        </div>
+        <MovieList movies={movies} auth={auth} />
       </div>
     );
   }
