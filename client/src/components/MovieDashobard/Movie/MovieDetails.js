@@ -157,5 +157,8 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "films" }, { collection: "comments" }])
+  firestoreConnect([
+    { collection: "films" },
+    { collection: "comments", orderBy: ["createdAt", "desc"] }
+  ])
 )(MovieDetails);

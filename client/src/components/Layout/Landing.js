@@ -1,43 +1,20 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import firebase from "../../config/firebaseConfig";
+import { Rating } from "primereact/rating";
+import { firestoreConnect, isLoaded } from "react-redux-firebase";
+import { compose } from "redux";
+
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
 class Landing extends Component {
-  constructor() {
-    super();
-    this.state = {
-      movie1: null,
-      movie2: null,
-      movie3: null
-    };
-  }
-
   componentDidMount() {
     window.scrollTo(0, 0);
-    firebase
-      .firestore()
-      .collection("films")
-      .doc("AqLDohAOoD4zzr1VrhnE")
-      .get()
-      .then(doc => this.setState({ movie1: doc.data() }));
-
-    firebase
-      .firestore()
-      .collection("films")
-      .doc("IM3EqISzjJjIVYtrtKiu")
-      .get()
-      .then(doc => this.setState({ movie2: doc.data() }));
-
-    firebase
-      .firestore()
-      .collection("films")
-      .doc("XY7oD07I8SyVq1pBoMeL")
-      .get()
-      .then(doc => this.setState({ movie3: doc.data() }));
   }
   render() {
     const { auth } = this.props;
+
     if (auth.uid) {
       return <Redirect to="/repertoire" />;
     }
@@ -94,75 +71,39 @@ class Landing extends Component {
               </div>
             </div>
           </div>
-          <div className="container">
-            <div
-              className="row justify-content-md-center text-center"
-              style={{ marginTop: "5px" }}
-            >
-              <div className="col col-lg-2">
-                {this.state.movie1 == null ? (
-                  <div className="spinner-grow text-info" role="status" />
-                ) : (
-                  <Link
-                    to="/repertoire/AqLDohAOoD4zzr1VrhnE/details"
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
-                    <h5 style={{ fontStyle: "italic", textAlign: "center" }}>
-                      {this.state.movie1.title}
-                    </h5>
+          <div className="container-fluid">
+            <p className="lead" style={{ marginTop: "19px" }}>
+              Currently our top 3 rated movies
+            </p>
+            <div className="row justify-content-md-center">
+              {isLoaded(this.props.movies) ? (
+                this.props.movies.map(movie => (
+                  <div className="col-sm-4" style={{ marginTop: "5px" }}>
+                    <Link
+                      to={`/repertoire/${movie.id}/details`}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      <h5 style={{ fontStyle: "italic", textAlign: "center" }}>
+                        {movie.title}
+                      </h5>
 
-                    <img
-                      className="rounded"
-                      src={this.state.movie1.image}
-                      alt=""
-                      style={{ marginBottom: "50px" }}
-                    />
-                  </Link>
-                )}
-              </div>
-              <div
-                className="col col-lg-2"
-                style={{ marginRight: "40px", marginLeft: "40px" }}
-              >
-                {" "}
-                {this.state.movie2 == null ? (
-                  <div className="spinner-grow text-info" role="status" />
-                ) : (
-                  <Link
-                    to="/repertoire/IM3EqISzjJjIVYtrtKiu/details"
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
-                    <h5 style={{ fontStyle: "italic" }}>
-                      {this.state.movie2.title}
-                    </h5>
-                    <img
-                      className="rounded"
-                      src={this.state.movie2.image}
-                      alt=""
-                    />
-                  </Link>
-                )}
-              </div>
-              <div className="col col-lg-2">
-                {" "}
-                {this.state.movie3 == null ? (
-                  <div className="spinner-grow text-info" role="status" />
-                ) : (
-                  <Link
-                    to="/repertoire/XY7oD07I8SyVq1pBoMeL/details"
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
-                    <h5 style={{ fontStyle: "italic" }}>
-                      {this.state.movie3.title}
-                    </h5>
-                    <img
-                      className="rounded"
-                      src={this.state.movie3.image}
-                      alt=""
-                    />
-                  </Link>
-                )}
-              </div>
+                      <img className="rounded" src={movie.image} alt="" />
+                      <Rating
+                        value={movie.rating}
+                        stars={7}
+                        style={{
+                          color: "gold",
+                          fontSize: "27px",
+                          fontWeight: "bold"
+                        }}
+                        cancel={false}
+                      />
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div className="spinner-grow text-info" role="status" />
+              )}
             </div>
           </div>
         </div>
@@ -173,7 +114,14 @@ class Landing extends Component {
 
 const mapStateToProps = state => {
   return {
+    movies: state.firestore.ordered.films,
     auth: state.firebase.auth
   };
 };
-export default connect(mapStateToProps)(Landing);
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection: "films", limit: 3, orderBy: ["rating", "desc"] }
+  ])
+)(Landing);

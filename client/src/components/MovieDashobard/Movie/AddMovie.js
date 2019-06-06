@@ -24,7 +24,9 @@ class AddMovie extends Component {
       movie: null,
       movieApiId: null,
       seance: [],
-      rating: 4
+      rating: 4,
+      likes: { quantity: 0, usersUid: [] },
+      dislikes: { quantity: 0, usersUid: [] }
     };
   }
 
@@ -142,7 +144,9 @@ class AddMovie extends Component {
       trailerURL: this.state.trailerURL,
       movieApiId: this.state.movieApiId,
       seance: this.state.seance,
-      rating: this.state.rating
+      rating: this.state.rating,
+      likes: this.state.likes,
+      dislikes: this.state.dislikes
     };
 
     this.props.createMovie(newMovie, this.props.history);

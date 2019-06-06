@@ -1,18 +1,18 @@
 .buttonHover {
-    display: inline-block;
-    color: #000;
-    text-decoration: none;
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
 }
 
 .buttonHover::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #000;
-    transition: width .3s;
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.3s;
 }
 
 .buttonHover:hover::after {
-    width: 100%;
+  width: 100%;
 }

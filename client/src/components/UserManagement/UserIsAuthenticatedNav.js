@@ -10,6 +10,7 @@ import "primeicons/primeicons.css";
 const UserIsAuthenticatedNav = props => {
   // const icon = <i class="fa fa-user-circle" />;
   const { auth, profile } = props;
+  console.log(auth.providerData[0].uid);
   return (
     <ul className="navbar-nav ml-auto" style={{ alignItems: "center" }}>
       {profile.isAdmin ? (

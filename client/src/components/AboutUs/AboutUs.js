@@ -181,90 +181,233 @@ class AboutUs extends Component {
         className="col-md-12 text-center"
         style={{ marginTop: "50px", background: "white" }}
       >
-        <img
-          src={require("../../images/cinema.svg.png")}
-          alt=""
-          className="img-fluid"
-          style={{ color: "white", transform: "scale(0.6, 0.6)" }}
-        />
-        <h1 className="display-4">
-          Who we are ? <i className="fa fa-video" />
-        </h1>
-        <p className="lead" style={{ fontSize: "22px" }}>
-          We are Premium Cinema, who is involved with the most famous movie
-          providers all around the world. Our app is used by the most famous
-          brands globally.
-        </p>
-        <OverlayPanel
-          ref={el => (this.op = el)}
-          showCloseIcon={true}
-          style={{
-            backgroundColor: "White",
-            borderStyle: "Solid",
-            borderColor: "#0051a5",
-            borderRadius: "30px",
-            alignItems: "center",
-            alignSelf: "center",
-            marginLeft: "80px"
-          }}
-          dismissable={true}
-          for="btn"
-        >
-          <div className="col md-12">
-            <OrganizationChart
-              value={this.state.data1}
-              nodeTemplate={this.nodeTemplate}
-              selection={this.state.selection}
-              selectionMode="multiple"
-              onSelectionChange={event =>
-                this.setState({ selection: event.data })
-              }
-              className="company"
-              style={{ fontSize: "20px", fontWeight: "bold" }}
-            />
+        <div className="row justify-content-md-center">
+          <OverlayPanel
+            ref={el => (this.op = el)}
+            showCloseIcon={true}
+            style={{
+              backgroundColor: "White",
+              borderStyle: "Solid",
+              borderColor: "#0051a5",
+              borderRadius: "30px",
+              alignItems: "center",
+              alignSelf: "center",
+              marginLeft: "80px"
+            }}
+            dismissable={true}
+            for="btn"
+          >
+            <div className="col-12">
+              <OrganizationChart
+                value={this.state.data1}
+                nodeTemplate={this.nodeTemplate}
+                selection={this.state.selection}
+                selectionMode="multiple"
+                onSelectionChange={event =>
+                  this.setState({ selection: event.data })
+                }
+                className="company"
+                style={{ fontSize: "20px", fontWeight: "bold" }}
+              />
+            </div>
+          </OverlayPanel>
+          <div className="col-5 align-items-stretch">
+            <div
+              className="card"
+              style={{
+                width: "auto",
+                border: "solid",
+                borderColor: "#0051a5",
+                borderRadius: "20px",
+                marginTop: "5px"
+              }}
+            >
+              <i className="fa fa-smile" />
+              <img
+                src={require("../../images/cinema.svg.png")}
+                alt=""
+                className="img-fluid"
+                style={{
+                  color: "white",
+                  marginTop: "3px",
+                  marginLeft: "3px",
+                  marginRight: "3px"
+                }}
+              />
+              <div class="card-body">
+                <h1 className="display-4">
+                  Who we are ? <i className="fa fa-video" />
+                </h1>
+                <p className="lead" style={{ fontSize: "22px" }}>
+                  We are Premium Cinema, who is involved with the most famous
+                  movie providers all around the world. Our app is used by the
+                  most famous brands globally.
+                </p>
+              </div>
+
+              <button
+                className="btn btn-lg btn-outline-light mr-2"
+                style={{
+                  backgroundColor: "#0051a5",
+                  marginLeft: "5px",
+                  marginBottom: "5px",
+                  border: "solid",
+                  fontWeight: "bold",
+                  borderRadius: "20px",
+                  borderColor: "#0051a5"
+                }}
+                label="toggle"
+                onClick={e => this.op.toggle(e)}
+                id="btn"
+              >
+                Check our awesome team
+              </button>
+            </div>
           </div>
-        </OverlayPanel>
-        <button
-          className="btn btn-lg btn-outline-light mr-2"
-          style={{
-            backgroundColor: "#0051a5",
-            marginLeft: "5px",
-            marginBottom: "5px",
-            border: "none",
-            marginTop: "5px",
-            fontWeight: "bold"
-          }}
-          label="toggle"
-          onClick={e => this.op.toggle(e)}
-          id="btn"
-        >
-          Check our awesome team
-        </button>
+        </div>
 
         <h1 className="display-4" style={{}}>
           Our goal is to:
         </h1>
-        <p className="lead" style={{ fontSize: "22px" }}>
-          <li className="">provide the best possible user experience</li>
-        </p>
-        <p className="lead" style={{ fontSize: "22px" }}>
-          <li className="">best app performence possible</li>
-        </p>
-        <p className="lead" style={{ fontSize: "22px" }}>
-          <li className="">make our customers happy as much as possible</li>
-        </p>
-        <p className="lead" style={{ fontSize: "22px" }}>
-          <li className="">make customers able leave their opinions</li>
-        </p>
+
+        <div className="container-fluid">
+          <div className="row justify-content-md-center">
+            <div className="col-3 align-items-stretch">
+              <div
+                className="card mr-10"
+                style={{
+                  width: "auto",
+                  border: "solid",
+                  borderColor: "#0051a5",
+                  borderRadius: "20px"
+                }}
+              >
+                <i
+                  className="pi pi-globe"
+                  style={{ fontSize: "5em", color: "#0051a5" }}
+                />
+                <div class="card-body">
+                  <h1 className="display-4">
+                    <p className="lead" style={{ fontSize: "22px" }}>
+                      Provide the best possible user <br /> experience
+                    </p>
+                  </h1>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-3 d-flexalign-items-stretch">
+              <div
+                className="card mr-10"
+                style={{
+                  width: "auto",
+                  border: "solid",
+                  borderColor: "#0051a5",
+                  borderRadius: "20px"
+                }}
+              >
+                <i
+                  className="pi pi-clock"
+                  style={{ fontSize: "5em", color: "#0051a5" }}
+                />
+                <div class="card-body">
+                  <h1 className="display-4">
+                    <p className="lead" style={{ fontSize: "22px" }}>
+                      Best app performence possible
+                      <br />
+                      &nbsp;
+                    </p>
+                  </h1>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-3 align-items-stretch">
+              <div
+                className="card mr-10"
+                style={{
+                  width: "auto",
+                  border: "solid",
+                  borderColor: "#0051a5",
+                  borderRadius: "20px"
+                }}
+              >
+                <i
+                  className="pi pi-users"
+                  style={{ fontSize: "5em", color: "#0051a5" }}
+                />
+                <div class="card-body">
+                  <h1 className="display-4">
+                    <p className="lead" style={{ fontSize: "22px" }}>
+                      Make our customers happy as{"   "} <br />
+                      much as possible
+                    </p>
+                  </h1>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-3 align-items-stretch">
+              <div
+                className="card"
+                style={{
+                  width: "auto",
+                  border: "solid",
+                  borderColor: "#0051a5",
+                  borderRadius: "20px"
+                }}
+              >
+                <i
+                  className="pi pi-envelope"
+                  style={{ fontSize: "5em", color: "#0051a5" }}
+                />
+                <div class="card-body">
+                  <h1 className="display-4">
+                    <p className="lead" style={{ fontSize: "22px" }}>
+                      &nbsp;Make customers able leave&nbsp; <br />
+                      their opinions
+                    </p>
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <h1 className="display-4" style={{}}>
           Contact us using one of these below
         </h1>
-        <p className="lead" style={{ fontSize: "22px" }}>
-          Email: ourmail@premiumCinema.com
-        </p>
-        <p className="lead" style={{ fontSize: "22px", marginBottom: "5px" }}>
-          Phone: +48 666666666
-        </p>
+        <div className="row justify-content-md-center">
+          <div className="col-4 align-items-stretch">
+            <div
+              className="card"
+              style={{
+                width: "auto",
+                border: "solid",
+                borderColor: "#0051a5",
+                borderRadius: "20px",
+                marginTop: "5px",
+                marginBottom: "5px"
+              }}
+            >
+              <i
+                className="pi pi-info-circle"
+                style={{ fontSize: "5em", color: "#0051a5" }}
+              />
+              <div class="card-body">
+                <p className="lead" style={{ fontSize: "22px" }}>
+                  Email: ourmail@premiumCinema.com
+                </p>
+                <p
+                  className="lead"
+                  style={{ fontSize: "22px", marginBottom: "5px" }}
+                >
+                  Phone: +48 666666666
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
